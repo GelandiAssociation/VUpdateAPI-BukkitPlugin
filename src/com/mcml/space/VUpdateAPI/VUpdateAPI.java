@@ -12,7 +12,7 @@ public class VUpdateAPI extends JavaPlugin {
     public void onEnable() {
         MainPlugin = this;
         this.connectToServer();
-        VUAPI.auto("VUpdateAPI", this, this.getFile(), 100);
+        VUAPI.auto("VUpdateAPI", this, this.getFile(), 102);
         this.getLogger().info("加载了！正在准备启用！");
         this.getLogger().info("作者乐乐和沐子|QQ1207223090");
     }

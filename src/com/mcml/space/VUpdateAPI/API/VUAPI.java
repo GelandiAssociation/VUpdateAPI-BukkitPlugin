@@ -6,6 +6,7 @@ import com.mcml.space.VUpdateAPI.UpdateMode;
 import com.mcml.space.VUpdateAPI.VUpdateAPI;
 import java.io.File;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
@@ -38,7 +39,7 @@ public class VUAPI {
             } catch (IOException ex) {
                 plugin.getLogger().info("错误！无法连接到更新服务器，自动更新终止.");
             }
-        }else{
+        } else {
             VUpdateAPI.MainPlugin.getLogger().info("无法进行插件的自动更新，因为服务器断线.");
         }
     }
@@ -81,6 +82,38 @@ public class VUAPI {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public static void connectToServer() {
+        String ServerIP = "vuapi.relatev.com";
+        int port = HTTPUtils.getServerPort();
+        try {
+            VUpdateAPI.MainPlugin.getLogger().info("正在尝试连接到云端更新服务器:" + ServerIP + ":" + port);
+            TCPUtils.Connect(ServerIP, port);
+        } catch (UnknownHostException ex) {
+            VUpdateAPI.MainPlugin.getLogger().info("无法连接到更新服务器，请联系作者乐乐：QQ1207223090！");
+            VUpdateAPI.MainPlugin.getLogger().info("无法解析到HOST域名，域名不存在?");
+            return;
+        } catch (IOException ex) {
+            VUpdateAPI.MainPlugin.getLogger().info("无法连接到更新服务器，请联系作者乐乐：QQ1207223090！");
+            VUpdateAPI.MainPlugin.getLogger().info("无法连接到服务器，服务器离线?");
+            return;
+        }
+    }
+
+    public static void connectToServer(String serverip, int port) {
+        try {
+            VUpdateAPI.MainPlugin.getLogger().info("正在尝试连接到云端更新服务器:" + serverip + ":" + port);
+            TCPUtils.Connect(serverip, port);
+        } catch (UnknownHostException ex) {
+            VUpdateAPI.MainPlugin.getLogger().info("无法连接到更新服务器，请联系作者乐乐：QQ1207223090！");
+            VUpdateAPI.MainPlugin.getLogger().info("无法解析到HOST域名，域名不存在?");
+            return;
+        } catch (IOException ex) {
+            VUpdateAPI.MainPlugin.getLogger().info("无法连接到更新服务器，请联系作者乐乐：QQ1207223090！");
+            VUpdateAPI.MainPlugin.getLogger().info("无法连接到服务器，服务器离线?");
+            return;
         }
     }
 }
